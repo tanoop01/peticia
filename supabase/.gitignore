@@ -1,0 +1,24 @@
+# Supabase local state files
+.branches
+.temp
+.env
+
+# Local Supabase runtime
+.docker
+volumes/
+
+# Supabase Studio local state
+.studio/
+
+# Backup files (keep backups out of git)
+*.backup
+*.dump
+*_backup_*.sql
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/

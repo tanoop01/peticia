@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Enhanced Dark Theme */
+  * {
+    @apply border-border-subtle;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    background-color: #0A0E13;
+  }
+  
+  body {
+    @apply bg-bg-primary text-text-primary;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Typography hierarchy */
+  h1 {
+    @apply text-3xl md:text-4xl font-semibold tracking-tight text-text-primary;
+  }
+  
+  h2 {
+    @apply text-2xl font-semibold tracking-tight text-text-primary;
+  }
+  
+  h3 {
+    @apply text-xl font-medium text-text-primary;
+  }
+  
+  /* Focus states - no outline for inputs */
+  *:focus-visible {
+    outline: none;
+  }
+
+  input:focus,
+  input:focus-visible,
+  textarea:focus,
+  textarea:focus-visible,
+  select:focus,
+  select:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: rgba(148, 163, 184, 0.2) !important;
+  }
+
+  /* Remove blue border from select dropdowns */
+  select {
+    outline: none !important;
+  }
+
+  select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: rgba(148, 163, 184, 0.2) !important;
+  }
+
+  /* Style select dropdown options */
+  select option {
+    background-color: #141B26 !important;
+    color: #F1F5F9 !important;
+    padding: 8px;
+  }
+
+  select option:checked,
+  select option:hover {
+    background-color: #1F2937 !important;
+    color: #F1F5F9 !important;
+  }
+
+  /* Fix browser autofill white background */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #141B26 inset !important;
+    -webkit-text-fill-color: #F1F5F9 !important;
+    box-shadow: 0 0 0 1000px #141B26 inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+/* Modern SaaS Utilities */
+@layer utilities {
+  .transition-smooth {
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .surface-card {
+    @apply bg-surface-card border border-border-strong rounded-xl shadow-lg;
+  }
+  
+  .surface-hover {
+    @apply hover:bg-surface-hover transition-all duration-200;
+  }
+  
+  /* Text gradients */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+  }
+  
+  .text-gradient-orange {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #FF6B35 0%, #F59E0B 100%);
+  }
+  
+  .text-gradient-green {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #10B981 0%, #06B6D4 100%);
+  }
+  
+  /* Backdrop blur for modals */
+  .backdrop-blur-dark {
+    backdrop-filter: blur(12px);
+    background-color: rgba(10, 14, 19, 0.8);
+  }
+}
+
+/* Minimal animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 300ms ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Brand gradients */
+.brand-gradient {
+  background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+}
+
+.brand-gradient-orange {
+  background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 100%);
+}
+
+.brand-gradient-green {
+  background: linear-gradient(135deg, #10B981 0%, #06B6D4 100%);
+}
+
+/* Glow effects for interactive elements */
+.glow-accent {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.glow-success {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+/* Card enhancements */
+.card-elevated {
+  @apply bg-surface-card border border-border-strong rounded-xl;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+.card-hover {
+  @apply transition-all duration-200;
+}
+
+.card-hover:hover {
+  @apply border-accent;
+  box-shadow: 0 8px 16px -2px rgba(59, 130, 246, 0.2), 0 4px 8px -2px rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Leaflet map styles */
+.leaflet-container {
+  @apply rounded-lg;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
