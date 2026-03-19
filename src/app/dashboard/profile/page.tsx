@@ -23,6 +23,9 @@ export default function ProfilePage() {
   const [showLocationFields, setShowLocationFields] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
+    fullName: '',
+    username: '',
+    email: '',
     city: '',
     state: '',
     role: '',
@@ -63,6 +66,9 @@ export default function ProfilePage() {
 
       setFormData({
         name: data.name || '',
+        fullName: data.full_name || '',
+        username: data.username || '',
+        email: data.email || '',
         city: data.city || '',
         state: data.state || '',
         role: data.role || '',
@@ -114,10 +120,10 @@ export default function ProfilePage() {
     if (!user?.id) return;
 
     // Validate required fields
-    if (!formData.name || !formData.city || !formData.state) {
+    if (!formData.name) {
       toast({
         title: 'Missing Information',
-        description: 'Please fill in Name, City, and State fields',
+        description: 'Please fill in Display Name field',
         variant: 'destructive',
       });
       return;
@@ -127,8 +133,9 @@ export default function ProfilePage() {
     try {
       const updateData: any = {
         name: formData.name,
-        city: formData.city,
-        state: formData.state,
+        full_name: formData.fullName || formData.name,
+        city: formData.city || null,
+        state: formData.state || null,
         role: formData.role,
         preferred_language: formData.preferredLanguage,
       };
@@ -207,6 +214,9 @@ export default function ProfilePage() {
         
         // Update form data to reflect saved changes
         setFormData({
+          fullName: updatedUser.full_name || '',
+          username: updatedUser.username || '',
+          email: updatedUser.email || '',
           name: updatedUser.name || '',
           city: updatedUser.city || '',
           state: updatedUser.state || '',
@@ -281,30 +291,79 @@ export default function ProfilePage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          {/* Phone Number (Read-only) */}
-          <div className="space-y-2">
-            <Label htmlFor="phone">Phone Number</Label>
-            <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-text-muted" />
-              <Input
-                id="phone"
-                value={formData.phoneNumber}
-                disabled
-                className="bg-bg-tertiary cursor-not-allowed"
-              />
+          {/* Email (Read-only) */}
+          {formData.email && (
+            <div className="space-y-2">
+              <Label htmlFor="email">Email Address</Label>
+              <div className="flex items-center gap-2">
+                <User className="w-4 h-4 text-text-muted" />
+                <Input
+                  id="email"
+                  value={formData.email}
+                  disabled
+                  className="bg-bg-tertiary cursor-not-allowed"
+                />
+              </div>
+              <p className="text-xs text-text-muted">Email cannot be changed</p>
             </div>
-            <p className="text-xs text-text-muted">Phone number cannot be changed</p>
+          )}
+
+          {/* Username (Read-only) */}
+          {formData.username && (
+            <div className="space-y-2">
+              <Label htmlFor="username">Username</Label>
+              <div className="flex items-center gap-2">
+                <User className="w-4 h-4 text-text-muted" />
+                <Input
+                  id="username"
+                  value={`@${formData.username}`}
+                  disabled
+                  className="bg-bg-tertiary cursor-not-allowed"
+                />
+              </div>
+              <p className="text-xs text-text-muted">Username cannot be changed</p>
+            </div>
+          )}
+
+          {/* Phone Number (Read-only) - Only show if exists */}
+          {formData.phoneNumber && (
+            <div className="space-y-2">
+              <Label htmlFor="phone">Phone Number</Label>
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-text-muted" />
+                <Input
+                  id="phone"
+                  value={formData.phoneNumber}
+                  disabled
+                  className="bg-bg-tertiary cursor-not-allowed"
+                />
+              </div>
+              <p className="text-xs text-text-muted">Phone number cannot be changed</p>
+            </div>
+          )}
+
+          {/* Full Name */}
+          <div className="space-y-2">
+            <Label htmlFor="fullName">Full Name</Label>
+            <Input
+              id="fullName"
+              value={formData.fullName}
+              onChange={(e) => handleInputChange('fullName', e.target.value)}
+              placeholder="Enter your full name"
+              className="bg-bg-secondary"
+            />
           </div>
 
-          {/* Name and Role */}
+          {/* Display Name and Role */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Full Name *</Label>
+              <Label htmlFor="name">Display Name *</Label>
               <Input
                 id="name"
-                placeholder="Enter your full name"
+                placeholder="How should we call you?"
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
+                className="bg-bg-secondary"
               />
             </div>
 

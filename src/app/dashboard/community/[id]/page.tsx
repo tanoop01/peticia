@@ -225,6 +225,39 @@ export default function CommunityPetitionDetailPage() {
         </CardContent>
       </Card>
 
+      {/* Updates Timeline */}
+      {petition.updates && petition.updates.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Updates</CardTitle>
+            <CardDescription>Latest developments on this petition</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {[...petition.updates]
+                .sort((a: any, b: any) => {
+                  const aTime = new Date(a.created_at || a.createdAt || 0).getTime();
+                  const bTime = new Date(b.created_at || b.createdAt || 0).getTime();
+                  return bTime - aTime;
+                })
+                .map((update: any) => (
+                  <div key={update.id} className="border-l-2 border-kairo-orange pl-4 py-2">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-xs font-medium text-kairo-orange uppercase">
+                        {update.type}
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        {formatDate(update.created_at || update.createdAt)}
+                      </span>
+                    </div>
+                    <p className="text-sm whitespace-pre-wrap">{update.content}</p>
+                  </div>
+                ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Share Modal */}
       {petition && (
         <ShareModal

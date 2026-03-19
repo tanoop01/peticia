@@ -94,6 +94,7 @@ export default function CommunityPage() {
               />
             </div>
             <select
+              title="Filter by category"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value as any)}
               className="h-10 rounded-md border-2 border-border-strong bg-bg-secondary px-3 text-text-primary md:w-48 focus:outline-none focus:ring-0 focus:shadow-none focus:border-border-strong"
@@ -133,6 +134,12 @@ export default function CommunityPage() {
                           <span className="font-medium text-kairo-orange">
                             {formatSignatureCount(petition.signatureCount)} signatures
                           </span>
+                          {petition.updates && petition.updates.length > 0 && (
+                            <>
+                              <span>•</span>
+                              <span>{petition.updates.length} update{petition.updates.length > 1 ? 's' : ''}</span>
+                            </>
+                          )}
                           <span>•</span>
                           <span>by {petition.creator.name}</span>
                         </div>
@@ -191,6 +198,11 @@ export default function CommunityPage() {
                           {formatSignatureCount(petition.signatureCount)}
                         </span>
                       </div>
+                      {petition.updates && petition.updates.length > 0 && (
+                        <div className="flex items-center gap-1">
+                          <span>{petition.updates.length} update{petition.updates.length > 1 ? 's' : ''}</span>
+                        </div>
+                      )}
                       <div className="flex items-center gap-1">
                         <MapPin className="w-4 h-4" />
                         <span>{petition.location.city}, {petition.location.state}</span>

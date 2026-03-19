@@ -599,14 +599,20 @@ export default function PetitionDetailPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {petition.updates.map((update: any) => (
+              {[...petition.updates]
+                .sort((a: any, b: any) => {
+                  const aTime = new Date(a.created_at || a.createdAt || 0).getTime();
+                  const bTime = new Date(b.created_at || b.createdAt || 0).getTime();
+                  return bTime - aTime;
+                })
+                .map((update: any) => (
                 <div key={update.id} className="border-l-2 border-kairo-orange pl-4 py-2">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-xs font-medium text-kairo-orange uppercase">
                       {update.type}
                     </span>
                     <span className="text-xs text-gray-500">
-                      {formatDate(update.created_at)}
+                      {formatDate(update.created_at || update.createdAt)}
                     </span>
                   </div>
                   <p className="text-sm">{update.content}</p>
@@ -635,30 +641,27 @@ export default function PetitionDetailPage() {
             </div>
           ) : (
             <div className="space-y-6">
-              {/* Signature Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* Signature List */}
+              <ul className="divide-y divide-border-subtle border border-border-subtle rounded-lg bg-bg-secondary">
                 {petition.signatures.map((sig: any) => (
-                  <div key={sig.id} className="flex items-center gap-3 p-3 rounded-lg border bg-gray-50 hover:bg-gray-100 transition-colors">
-                    <div className="w-10 h-10 kairo-gradient rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                      {sig.user?.name?.[0]?.toUpperCase() || '?'}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-medium text-gray-900 truncate">
-                        {sig.user?.name || 'Anonymous User'}
+                  <li key={sig.id} className="px-4 py-3">
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="min-w-0">
+                        <p className="font-medium text-text-primary truncate">
+                          {sig.user?.name || 'Anonymous User'}
+                        </p>
+                        <p className="text-sm text-text-secondary">
+                          {sig.user?.city || 'Unknown'}, {sig.user?.state || 'Unknown'}
+                        </p>
                       </div>
-                      <div className="text-xs text-gray-600 flex items-center gap-2">
-                        <span>{sig.user?.city || 'Unknown'}, {sig.user?.state || 'Unknown'}</span>
-                        {sig.is_verified && (
-                          <CheckCircle className="w-3 h-3 text-green-600" />
-                        )}
-                      </div>
-                      <div className="text-xs text-gray-500">
-                        {formatDate(sig.signed_at)}
+                      <div className="flex items-center gap-2 text-xs text-text-muted whitespace-nowrap">
+                        <span>{formatDate(sig.signed_at)}</span>
+                        {sig.is_verified && <CheckCircle className="w-3 h-3 text-green-600" />}
                       </div>
                     </div>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
 
               {/* Show count if there are more signatures */}
               {petition.signatureCount > petition.signatures.length && (

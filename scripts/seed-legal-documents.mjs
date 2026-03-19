@@ -1,10 +1,3 @@
-/**
- * Seed script for RAG legal documents database
- * 
- * IMPORTANT: Make sure your Next.js dev server is running first!
- * Run: npm run dev
- * Then in another terminal: node scripts/seed-legal-documents.mjs
- */
 
 const LEGAL_DOCUMENTS = [
   // === CONSUMER PROTECTION ===

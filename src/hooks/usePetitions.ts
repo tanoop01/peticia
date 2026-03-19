@@ -68,7 +68,8 @@ export function usePetitions(options: UsePetitionsOptions = {}) {
           response_received,
           resolved_at,
           language,
-          creator:users!creator_id(id, name, city, state, trust_score)
+          creator:users!creator_id(id, name, city, state, trust_score),
+          petition_updates(id, created_at)
         `)
         .order('created_at', { ascending: false });
 

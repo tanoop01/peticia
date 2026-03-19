@@ -7,15 +7,20 @@
  */
 export interface User {
   id: string;
-  phoneNumber: string;
+  email?: string;
+  username?: string;
+  phoneNumber?: string; // Optional now - legacy field
   name: string;
-  city: string;
-  state: string;
+  fullName?: string;
+  city?: string;
+  state?: string;
   role: UserRole;
   preferredLanguage: Language;
   isVerified: boolean;
+  emailVerified?: boolean;
   verificationBadge?: VerificationBadge;
   trustScore?: number;
+  authProvider?: string;
   createdAt: Date;
   updatedAt: Date;
 }
