@@ -62,17 +62,17 @@ export default function CommunityPage() {
       {/* Stats */}
       <div className="grid md:grid-cols-3 gap-6">
         <StatCard
-          icon={<TrendingUp className="w-6 h-6 text-kairo-orange" />}
+          icon={<TrendingUp className="w-6 h-6 text-foreground" />}
           label="Active Petitions"
           value={petitions.length}
         />
         <StatCard
-          icon={<MapPin className="w-6 h-6 text-blue-600" />}
+          icon={<MapPin className="w-6 h-6 text-foreground" />}
           label={`In ${user?.city}`}
           value={localPetitions.length}
         />
         <StatCard
-          icon={<Users className="w-6 h-6 text-green-600" />}
+          icon={<Users className="w-6 h-6 text-foreground" />}
           label="Total Signatures"
           value={formatSignatureCount(
             petitions.reduce((sum, p) => sum + p.signatureCount, 0)
@@ -114,7 +114,7 @@ export default function CommunityPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-kairo-orange" />
+              <MapPin className="w-5 h-5 text-foreground" />
               Trending in {user?.city}
             </CardTitle>
             <CardDescription>Popular petitions in your area</CardDescription>
@@ -131,7 +131,7 @@ export default function CommunityPage() {
                           {petition.description}
                         </p>
                         <div className="flex items-center gap-4 text-xs text-text-muted">
-                          <span className="font-medium text-kairo-orange">
+                          <span className="font-medium text-foreground">
                             {formatSignatureCount(petition.signatureCount)} signatures
                           </span>
                           {petition.updates && petition.updates.length > 0 && (
@@ -164,7 +164,7 @@ export default function CommunityPage() {
         <CardContent>
           {loading ? (
             <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-kairo-orange mx-auto" />
+              <div className="animate-spin rounded-full h-12 w-12 border-2 border-border border-t-foreground mx-auto" />
             </div>
           ) : filteredPetitions.length === 0 ? (
             <div className="text-center py-12 text-text-muted">
@@ -194,7 +194,7 @@ export default function CommunityPage() {
                     <div className="flex items-center gap-6 text-sm text-text-muted">
                       <div className="flex items-center gap-1">
                         <Users className="w-4 h-4" />
-                        <span className="font-semibold text-kairo-orange">
+                        <span className="font-semibold text-foreground">
                           {formatSignatureCount(petition.signatureCount)}
                         </span>
                       </div>

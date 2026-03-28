@@ -135,6 +135,8 @@ export default function CommunityPetitionDetailPage() {
     );
   }
 
+  const isSigningClosed = petition.status === 'resolved' || petition.status === 'closed';
+
   return (
     <div className="max-w-5xl mx-auto space-y-6">
       <Link href="/dashboard/community">
@@ -186,7 +188,12 @@ export default function CommunityPetitionDetailPage() {
 
           {user?.id !== petition.creatorId && (
             <div className="pt-8 border-t">
-              {hasSigned ? (
+              {isSigningClosed ? (
+                <div className="flex items-center gap-2 text-gray-500">
+                  <CheckCircle className="w-5 h-5" />
+                  <span className="font-medium text-lg">Signing closed for this petition</span>
+                </div>
+              ) : hasSigned ? (
                 <div className="flex items-center gap-2 text-success">
                   <CheckCircle className="w-5 h-5" />
                   <span className="font-medium text-lg">Signed</span>
@@ -194,7 +201,7 @@ export default function CommunityPetitionDetailPage() {
               ) : (
                 <Button
                   onClick={handleSign}
-                  disabled={signing || checkingSignature}
+                  disabled={isSigningClosed || signing || checkingSignature}
                   size="lg"
                   className="w-full md:w-auto"
                 >

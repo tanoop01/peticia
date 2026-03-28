@@ -79,14 +79,14 @@ export default function AIAssistantPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
-      <div className="kairo-gradient rounded-2xl p-8 text-white">
+      <div className="rounded-2xl border border-border bg-gradient-to-br from-card to-muted p-8 text-foreground">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+          <div className="w-12 h-12 bg-background rounded-xl flex items-center justify-center border border-border">
             <Sparkles className="w-6 h-6" />
           </div>
           <div>
             <h1 className="text-3xl font-bold">AI Rights Assistant</h1>
-            <p className="opacity-90">Get instant legal guidance in your language</p>
+            <p className="text-muted-foreground">Get instant legal guidance in your language</p>
           </div>
         </div>
       </div>
@@ -133,7 +133,7 @@ export default function AIAssistantPage() {
           <Button
             onClick={handleSubmit}
             disabled={loading || !query.trim()}
-            className="w-full bg-accent hover:bg-accent-hover"
+            className="w-full"
             size="lg"
           >
             {loading ? (
@@ -163,7 +163,7 @@ export default function AIAssistantPage() {
                   onClick={() => setQuery(q)}
                   className="text-left p-3 bg-bg-secondary border border-border-subtle rounded-lg hover:border-border-strong transition-colors text-text-primary"
                 >
-                  <MessageSquare className="w-4 h-4 text-kairo-orange mb-2" />
+                  <MessageSquare className="w-4 h-4 text-foreground mb-2" />
                   <p className="text-sm">{q}</p>
                 </button>
               ))}
@@ -174,10 +174,10 @@ export default function AIAssistantPage() {
 
       {/* AI Response */}
       {response && (
-        <Card className="border-2 border-kairo-orange">
+        <Card className="border-2 border-border">
           <CardHeader>
             <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-kairo-orange" />
+              <Sparkles className="w-5 h-5 text-foreground" />
               <CardTitle>AI Legal Guidance</CardTitle>
             </div>
             <CardDescription>
@@ -197,7 +197,6 @@ export default function AIAssistantPage() {
                   // Navigate to petition creation with context
                   window.location.href = `/dashboard/create-petition?query=${encodeURIComponent(query)}`;
                 }}
-                className="bg-accent hover:bg-accent-hover"
               >
                 Create Petition from This
               </Button>
@@ -213,9 +212,9 @@ function InfoCard({ icon, title, description }: any) {
   return (
     <Card>
       <CardContent className="pt-6">
-        <div className="text-kairo-orange mb-3">{icon}</div>
+        <div className="text-foreground mb-3">{icon}</div>
         <h3 className="font-semibold mb-1 text-sm">{title}</h3>
-        <p className="text-xs text-gray-600">{description}</p>
+        <p className="text-xs text-muted-foreground">{description}</p>
       </CardContent>
     </Card>
   );

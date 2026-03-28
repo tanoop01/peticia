@@ -292,9 +292,9 @@ export default function CreatePetitionPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       {/* Header */}
-      <div className="kairo-gradient rounded-2xl p-8 text-white">
+      <div className="rounded-2xl border border-border bg-gradient-to-br from-card to-muted p-8 text-foreground">
         <h1 className="text-3xl font-bold mb-2">Create a Petition</h1>
-        <p className="opacity-90">
+        <p className="text-muted-foreground">
           {step === 'choice' && 'Choose how you want to create your petition'}
           {step === 'details' && 'Tell us about the problem'}
           {step === 'manual' && 'Write your petition'}
@@ -311,14 +311,14 @@ export default function CreatePetitionPage() {
             completed={step === 'review' || step === 'location'} 
             label="1" 
           />
-          <div className="flex-1 h-1 bg-gray-200 rounded">
-            <div className={`h-full kairo-gradient rounded transition-all ${
+          <div className="flex-1 h-1 bg-muted rounded">
+            <div className={`h-full bg-foreground rounded transition-all ${
               step === 'details' || step === 'manual' ? 'w-0' : step === 'review' ? 'w-1/2' : 'w-full'
             }`} />
           </div>
           <StepIndicator active={step === 'review'} completed={step === 'location'} label="2" />
-          <div className="flex-1 h-1 bg-gray-200 rounded">
-            <div className={`h-full kairo-gradient rounded transition-all ${
+          <div className="flex-1 h-1 bg-muted rounded">
+            <div className={`h-full bg-foreground rounded transition-all ${
               step === 'location' ? 'w-full' : 'w-0'
             }`} />
           </div>
@@ -330,10 +330,10 @@ export default function CreatePetitionPage() {
       {step === 'choice' && (
         <div className="grid md:grid-cols-2 gap-6">
           {/* AI Generation Option */}
-          <Card className="cursor-pointer hover:shadow-lg transition-shadow border-2 hover:border-green-500" onClick={() => handleModeSelection('ai')}>
+          <Card className="cursor-pointer hover:shadow-lg transition-shadow border-2 hover:border-border-strong" onClick={() => handleModeSelection('ai')}>
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mb-4">
-                <Wand2 className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 border border-border bg-muted">
+                <Wand2 className="w-6 h-6 text-foreground" />
               </div>
               <CardTitle>Generate with AI</CardTitle>
               <CardDescription>
@@ -341,25 +341,25 @@ export default function CreatePetitionPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-2 text-sm text-gray-600">
+              <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2">
-                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span className="text-foreground mt-0.5">✓</span>
                   <span>Professionally formatted petition</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span className="text-foreground mt-0.5">✓</span>
                   <span>Includes relevant legal references</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span className="text-foreground mt-0.5">✓</span>
                   <span>Quick and easy to create</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-green-600 mt-0.5">✓</span>
+                  <span className="text-foreground mt-0.5">✓</span>
                   <span>Edit before publishing</span>
                 </li>
               </ul>
-              <Button variant="outline" className="w-full mt-6 hover:border-green-500">
+              <Button variant="outline" className="w-full mt-6 hover:border-border-strong">
                 <Sparkles className="w-4 h-4 mr-2" />
                 Use AI Assistant
               </Button>
@@ -367,10 +367,10 @@ export default function CreatePetitionPage() {
           </Card>
 
           {/* Manual Writing Option */}
-          <Card className="cursor-pointer hover:shadow-lg transition-shadow border-2 hover:border-kairo-blue" onClick={() => handleModeSelection('manual')}>
+          <Card className="cursor-pointer hover:shadow-lg transition-shadow border-2 hover:border-border-strong" onClick={() => handleModeSelection('manual')}>
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4">
-                <Edit3 className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 border border-border bg-muted">
+                <Edit3 className="w-6 h-6 text-foreground" />
               </div>
               <CardTitle>Write Manually</CardTitle>
               <CardDescription>
@@ -378,25 +378,25 @@ export default function CreatePetitionPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-2 text-sm text-gray-600">
+              <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2">
-                  <span className="text-blue-600 mt-0.5">✓</span>
+                  <span className="text-foreground mt-0.5">✓</span>
                   <span>Full creative control</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-blue-600 mt-0.5">✓</span>
+                  <span className="text-foreground mt-0.5">✓</span>
                   <span>Express in your own words</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-blue-600 mt-0.5">✓</span>
+                  <span className="text-foreground mt-0.5">✓</span>
                   <span>No AI required</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-blue-600 mt-0.5">✓</span>
+                  <span className="text-foreground mt-0.5">✓</span>
                   <span>Best for experienced writers</span>
                 </li>
               </ul>
-              <Button variant="outline" className="w-full mt-6 hover:border-blue-500">
+              <Button variant="outline" className="w-full mt-6 hover:border-border-strong">
                 <FileText className="w-4 h-4 mr-2" />
                 Write Myself
               </Button>
@@ -706,10 +706,10 @@ function StepIndicator({ active, completed, label }: any) {
     <div
       className={`w-8 h-8 rounded-full flex items-center justify-center font-medium text-sm ${
         completed
-          ? 'kairo-gradient text-white'
+          ? 'bg-foreground text-background'
           : active
-          ? 'border-2 border-kairo-orange text-kairo-orange'
-          : 'bg-gray-200 text-gray-500'
+          ? 'border-2 border-foreground text-foreground'
+          : 'bg-muted text-muted-foreground'
       }`}
     >
       {label}

@@ -33,13 +33,41 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Prevent signing petitions that are already resolved/closed.
+    const { data: petition, error: petitionError } = await supabaseAdmin
+      .from('petitions')
+      .select('id, status')
+      .eq('id', petition_id)
+      .maybeSingle();
+
+    if (petitionError) {
+      return NextResponse.json(
+        { error: petitionError.message },
+        { status: 500 }
+      );
+    }
+
+    if (!petition) {
+      return NextResponse.json(
+        { error: 'Petition not found' },
+        { status: 404 }
+      );
+    }
+
+    if (petition.status === 'resolved' || petition.status === 'closed') {
+      return NextResponse.json(
+        { error: 'This petition is resolved and no longer accepts signatures' },
+        { status: 400 }
+      );
+    }
+
     // Check if user already signed this petition
     const { data: existingSignature } = await supabaseAdmin
       .from('signatures')
       .select('id')
       .eq('petition_id', petition_id)
       .eq('user_id', user_id)
-      .single();
+      .maybeSingle();
 
     if (existingSignature) {
       return NextResponse.json(

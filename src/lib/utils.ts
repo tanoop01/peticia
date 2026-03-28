@@ -1,4 +1,4 @@
-import { type ClassValue, clsx } from "clsx"
+import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
 export function cn(...inputs: ClassValue[]) {
@@ -8,110 +8,96 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * Format date for display
  */
-export function formatDate(date: Date | string): string {
-  const d = typeof date === 'string' ? new Date(date) : date;
+export function formatDate(date: Date | string | undefined): string {
+  if (!date) return 'Unknown'
+  const d = typeof date === 'string' ? new Date(date) : date
   return d.toLocaleDateString('en-IN', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-  });
+  })
 }
 
 /**
  * Format relative time (e.g., "2 hours ago")
  */
-export function formatRelativeTime(date: Date | string): string {
-  const d = typeof date === 'string' ? new Date(date) : date;
-  const now = new Date();
-  const diffInSeconds = Math.floor((now.getTime() - d.getTime()) / 1000);
+export function formatRelativeTime(date: Date | string | undefined): string {
+  if (!date) return 'Unknown'
+  const d = typeof date === 'string' ? new Date(date) : date
+  const now = new Date()
+  const diffInSeconds = Math.floor((now.getTime() - d.getTime()) / 1000)
 
-  if (diffInSeconds < 60) return 'Just now';
-  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
-  if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
-  if (diffInSeconds < 2592000) return `${Math.floor(diffInSeconds / 86400)} days ago`;
-  if (diffInSeconds < 31536000) return `${Math.floor(diffInSeconds / 2592000)} months ago`;
-  return `${Math.floor(diffInSeconds / 31536000)} years ago`;
+  if (diffInSeconds < 60) return 'Just now'
+  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`
+  if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`
+  if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)} days ago`
+  
+  return formatDate(date)
 }
 
 /**
- * Format signature count
+ * Format signature count (e.g., "1.2K", "5.6M")
  */
-export function formatSignatureCount(count: number): string {
-  if (count < 1000) return count.toString();
-  if (count < 10000) return `${(count / 1000).toFixed(1)}K`;
-  if (count < 100000) return `${Math.floor(count / 1000)}K`;
-  if (count < 1000000) return `${(count / 1000).toFixed(0)}K`;
-  return `${(count / 1000000).toFixed(1)}M`;
+export function formatSignatureCount(count: number | undefined): string {
+  if (!count) return '0'
+  if (count >= 1000000) return (count / 1000000).toFixed(1) + 'M'
+  if (count >= 1000) return (count / 1000).toFixed(1) + 'K'
+  return count.toString()
 }
 
 /**
  * Get category display name
  */
-export function getCategoryDisplay(category: string): string {
-  const categories: Record<string, string> = {
-    infrastructure: 'Infrastructure',
-    safety: 'Safety & Security',
-    rights: 'Rights & Justice',
-    consumer: 'Consumer Rights',
-    environment: 'Environment',
-    labor: 'Labor & Employment',
-    education: 'Education',
-    health: 'Health',
-    corruption: 'Corruption',
-    other: 'Other'
-  };
-  return categories[category] || category;
+export function getCategoryDisplay(category: string | undefined): string {
+  const categoryMap: Record<string, string> = {
+    'education': 'Education',
+    'health': 'Health',
+    'infrastructure': 'Infrastructure',
+    'environment': 'Environment',
+    'economy': 'Economy',
+    'security': 'Security',
+    'women_safety': "Women's Safety",
+    'governance': 'Governance',
+    'other': 'Other',
+  }
+  return categoryMap[category?.toLowerCase() || ''] || category || 'Other'
 }
 
 /**
- * Get status badge color
+ * Get status display name
  */
-export function getStatusColor(status: string): string {
-  const colors: Record<string, string> = {
-    draft: 'bg-gray-100 text-gray-800',
-    active: 'bg-blue-100 text-blue-800',
-    growing: 'bg-green-100 text-green-800',
-    sent_to_authority: 'bg-yellow-100 text-yellow-800',
-    response_received: 'bg-purple-100 text-purple-800',
-    action_taken: 'bg-orange-100 text-orange-800',
-    resolved: 'bg-emerald-100 text-emerald-800 font-semibold',
-    closed: 'bg-gray-100 text-gray-800'
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+export function getStatusDisplay(status: string | undefined): string {
+  const statusMap: Record<string, string> = {
+    'pending': 'Pending',
+    'active': 'Active',
+    'resolved': 'Resolved',
+    'rejected': 'Rejected',
+    'draft': 'Draft',
+  }
+  return statusMap[status?.toLowerCase() || ''] || status || 'Unknown'
 }
 
 /**
- * Get status display text
+ * Get status color class
  */
-export function getStatusDisplay(status: string): string {
-  const statuses: Record<string, string> = {
-    draft: 'Draft',
-    active: 'Active',
-    growing: 'Growing',
-    sent_to_authority: 'Sent to Authority',
-    response_received: 'Response Received',
-    action_taken: 'Action Taken',
-    resolved: 'Resolved',
-    closed: 'Closed'
-  };
-  return statuses[status] || status;
+export function getStatusColor(status: string | undefined): string {
+  const colorMap: Record<string, string> = {
+    'pending': 'bg-slate-200 text-slate-800',
+    'active': 'bg-slate-200 text-slate-800',
+    'resolved': 'bg-slate-300 text-slate-900',
+    'rejected': 'bg-slate-300 text-slate-900',
+    'draft': 'bg-slate-100 text-slate-700',
+  }
+  return colorMap[status?.toLowerCase() || ''] || 'bg-slate-100 text-slate-700'
 }
 
 /**
- * Truncate text
+ * Generate mailto link for petitions
  */
-export function truncate(text: string, length: number): string {
-  if (text.length <= length) return text;
-  return text.substring(0, length) + '...';
-}
-
-/**
- * Generate mailto link for authority
- */
-export function generateMailtoLink(
-  email: string,
-  subject: string,
-  body: string
-): string {
-  return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+export function generateMailtoLink(email: string | undefined, subject?: string, body?: string): string {
+  if (!email) return ''
+  const finalSubject = subject || 'Petition Support'
+  const finalBody = body || 'We request your support for this petition.'
+  
+  return `mailto:${email}?subject=${encodeURIComponent(finalSubject)}&body=${encodeURIComponent(finalBody)}`
 }

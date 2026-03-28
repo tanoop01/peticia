@@ -19,20 +19,20 @@ const config = {
     },
     extend: {
       colors: {
-        // Enhanced Dark Theme with Better Contrast
-        'bg-primary': '#0A0E13',
-        'bg-secondary': '#141B26',
-        'bg-tertiary': '#1A2332',
-        
-        'surface-card': '#141B26',
-        'surface-hover': '#1F2937',
-        
-        'border-subtle': 'rgba(148, 163, 184, 0.1)',
-        'border-strong': 'rgba(148, 163, 184, 0.2)',
-        
-        'text-primary': '#F1F5F9',
-        'text-secondary': '#94A3B8',
-        'text-muted': '#64748B',
+        // Light shadcn-like palette for legacy utility classes
+        'bg-primary': '#f8fafc',
+        'bg-secondary': '#ffffff',
+        'bg-tertiary': '#f1f5f9',
+
+        'surface-card': '#ffffff',
+        'surface-hover': '#f8fafc',
+
+        'border-subtle': 'rgba(15, 23, 42, 0.08)',
+        'border-strong': 'rgba(15, 23, 42, 0.14)',
+
+        'text-primary': '#0f172a',
+        'text-secondary': '#475569',
+        'text-muted': '#64748b',
         
         // Vibrant Accent Colors
         accent: {

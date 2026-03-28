@@ -17,7 +17,7 @@ export default function MyPetitionsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">My Petitions</h1>
-          <p className="text-gray-600">Track and manage your civic actions</p>
+          <p className="text-muted-foreground">Track and manage your civic actions</p>
         </div>
         <Link href="/dashboard/create-petition">
           <Button>
@@ -29,14 +29,14 @@ export default function MyPetitionsPage() {
 
       {loading ? (
         <div className="text-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-kairo-orange mx-auto" />
+          <div className="animate-spin rounded-full h-12 w-12 border-2 border-border border-t-foreground mx-auto" />
         </div>
       ) : petitions.length === 0 ? (
         <Card>
           <CardContent className="text-center py-12">
             <FileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-2">No Petitions Yet</h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-muted-foreground mb-6">
               Start creating change by launching your first petition
             </p>
             <Link href="/dashboard/create-petition">
@@ -59,7 +59,7 @@ export default function MyPetitionsPage() {
                         <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(petition.status)}`}>
                           {getStatusDisplay(petition.status)}
                         </span>
-                        <span className="text-sm text-gray-600">
+                        <span className="text-sm text-muted-foreground">
                           {getCategoryDisplay(petition.category)}
                         </span>
                       </div>
@@ -71,10 +71,10 @@ export default function MyPetitionsPage() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center gap-6 text-sm text-gray-600">
+                  <div className="flex items-center gap-6 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
                       <FileText className="w-4 h-4" />
-                      <span className="font-semibold text-kairo-orange">
+                      <span className="font-semibold text-foreground">
                         {formatSignatureCount(petition.signatureCount)} signatures
                       </span>
                     </div>
@@ -83,7 +83,7 @@ export default function MyPetitionsPage() {
                     {petition.sentToAuthority && (
                       <>
                         <span>•</span>
-                        <span className="text-green-600 font-medium">Sent to Authority</span>
+                        <span className="text-foreground font-medium">Sent to Authority</span>
                       </>
                     )}
                   </div>
