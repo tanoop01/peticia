@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { RouteLoadingWrapper } from "@/components/RouteLoadingWrapper";
+import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -20,16 +21,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", inter.variable)}>
+    <html lang="en" suppressHydrationWarning className={cn("font-sans", inter.variable)}>
       <body className="antialiased">
-        <TooltipProvider>
-          <div className="min-h-screen bg-background">
-            <RouteLoadingWrapper>
-              {children}
-            </RouteLoadingWrapper>
-          </div>
-          <Toaster />
-        </TooltipProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+        >
+          <TooltipProvider>
+            <div className="min-h-screen bg-background">
+              <RouteLoadingWrapper>
+                {children}
+              </RouteLoadingWrapper>
+            </div>
+            <Toaster />
+          </TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

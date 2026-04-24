@@ -36,7 +36,7 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8">
       {/* Welcome Section */}
-      <div className="rounded-xl border border-slate-200/80 bg-gradient-to-b from-white to-slate-50/70 p-6 shadow-sm">
+      <div className="rounded-xl border border-border bg-gradient-to-b from-card to-card/70 p-6 shadow-sm">
         <h1 className="text-2xl font-semibold text-foreground mb-2">Welcome back, {user?.name}</h1>
         <p className="text-sm text-muted-foreground mb-6">
           Ready to create change in {user?.city}?
@@ -100,7 +100,7 @@ export default function DashboardPage() {
             ))}
           </div>
         ) : (
-          <Card className="bg-gradient-to-b from-white to-slate-50/70">
+          <Card>
             <CardContent className="flex flex-col items-center justify-center py-12">
               <FileText className="w-12 h-12 text-muted-foreground mb-4" />
               <p className="text-muted-foreground">No petitions yet</p>
@@ -139,7 +139,7 @@ export default function DashboardPage() {
             ))}
           </div>
         ) : (
-          <Card className="bg-gradient-to-b from-white to-slate-50/70">
+          <Card>
             <CardContent className="flex flex-col items-center justify-center py-12">
               <Users className="w-12 h-12 text-muted-foreground mb-4" />
               <p className="text-muted-foreground">No petitions in your area yet</p>
@@ -163,7 +163,7 @@ function StatCard({
   loading?: boolean
 }) {
   return (
-    <Card className="bg-gradient-to-b from-white to-slate-50/70">
+    <Card>
       <CardContent className="pt-6">
         <div className="flex items-center justify-between">
           <div>
@@ -172,7 +172,7 @@ function StatCard({
               {loading ? '...' : value}
             </p>
           </div>
-          <div className="rounded-xl border border-slate-200/80 bg-slate-100/80 p-3">{icon}</div>
+          <div className="rounded-xl border border-border bg-muted/50 p-3">{icon}</div>
         </div>
       </CardContent>
     </Card>
@@ -182,12 +182,12 @@ function StatCard({
 const PetitionCard = memo(function PetitionCard({ petition }: { petition: any }) {
   return (
     <Link href={`/dashboard/petitions/${petition.id}`}>
-      <Card className="h-full cursor-pointer bg-gradient-to-b from-white to-slate-50/70 transition-shadow hover:shadow-md">
+      <Card className="h-full cursor-pointer transition-shadow hover:shadow-md">
         <CardHeader>
           <div className="flex items-start justify-between gap-2">
             <div className="flex-1">
               <CardTitle className="line-clamp-2">{petition.title}</CardTitle>
-              <CardDescription className="mt-1">
+              <CardDescription className="mt-1 text-sm">
                 By {petition.creatorName}
               </CardDescription>
             </div>
@@ -204,6 +204,8 @@ const PetitionCard = memo(function PetitionCard({ petition }: { petition: any })
           <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
             {petition.description}
           </p>
+        </CardContent>
+        <div className="mt-auto border-t border-border/70 px-4 py-4">
           <div className="flex items-center justify-between text-sm">
             <div className="flex gap-4">
               <div>
@@ -223,7 +225,7 @@ const PetitionCard = memo(function PetitionCard({ petition }: { petition: any })
               {formatRelativeTime(petition.createdAt)}
             </span>
           </div>
-        </CardContent>
+        </div>
       </Card>
     </Link>
   )

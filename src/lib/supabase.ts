@@ -3,6 +3,30 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
+const fetchWithSupabaseDiagnostics: typeof fetch = async (input, init) => {
+  try {
+    return await fetch(input, init);
+  } catch (error) {
+    const target =
+      typeof input === 'string'
+        ? input
+        : input instanceof URL
+          ? input.toString()
+          : input.url;
+
+    if (target.includes('.supabase.co')) {
+      const networkError = new Error(
+        'Unable to reach Supabase. Check NEXT_PUBLIC_SUPABASE_URL and DNS/network connectivity.'
+      );
+      (networkError as any).code = 'SUPABASE_NETWORK_ERROR';
+      (networkError as any).cause = error;
+      throw networkError;
+    }
+
+    throw error;
+  }
+};
+
 if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables');
 }
@@ -14,6 +38,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     detectSessionInUrl: true
   },
   global: {
+    fetch: fetchWithSupabaseDiagnostics,
     headers: {
       'x-client-info': 'kairo-web-app'
     }

@@ -19,20 +19,20 @@ const config = {
     },
     extend: {
       colors: {
-        // Light shadcn-like palette for legacy utility classes
-        'bg-primary': '#f8fafc',
-        'bg-secondary': '#ffffff',
-        'bg-tertiary': '#f1f5f9',
+        // Legacy utility aliases bound to CSS variables for theme support
+        'bg-primary': 'var(--app-bg)',
+        'bg-secondary': 'var(--app-panel)',
+        'bg-tertiary': 'var(--app-bg-elevated)',
 
-        'surface-card': '#ffffff',
-        'surface-hover': '#f8fafc',
+        'surface-card': 'var(--app-panel)',
+        'surface-hover': 'var(--app-panel-2)',
 
-        'border-subtle': 'rgba(15, 23, 42, 0.08)',
-        'border-strong': 'rgba(15, 23, 42, 0.14)',
+        'border-subtle': 'var(--app-border)',
+        'border-strong': 'var(--app-border-strong)',
 
-        'text-primary': '#0f172a',
-        'text-secondary': '#475569',
-        'text-muted': '#64748b',
+        'text-primary': 'var(--app-text)',
+        'text-secondary': 'var(--app-accent-2)',
+        'text-muted': 'var(--app-text-muted)',
         
         // Vibrant Accent Colors
         accent: {

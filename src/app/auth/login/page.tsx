@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { auth } from '@/lib/firebase';
 import { 
   createUserWithEmailAndPassword, 
@@ -18,7 +19,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Shield, ArrowLeft, Mail, Lock, User, MapPin } from 'lucide-react';
+import { ArrowLeft, Mail, Lock, User, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import { useToast } from '@/hooks/use-toast';
 
@@ -531,7 +532,9 @@ export default function LoginPage() {
       console.error('Error creating profile:', error);
       
       let errorMessage = 'Failed to create profile. Please try again.';
-      if (error.code === '23505') {
+      if (error.code === 'SUPABASE_NETWORK_ERROR' || error.message?.includes('Unable to reach Supabase')) {
+        errorMessage = 'Cannot connect to Supabase. Verify NEXT_PUBLIC_SUPABASE_URL in your .env.local and confirm the project URL from Supabase Settings > API.';
+      } else if (error.code === '23505') {
         if (error.message.includes('username')) {
           errorMessage = 'Username already taken';
         } else if (error.message.includes('email')) {
@@ -560,8 +563,8 @@ export default function LoginPage() {
         <Card className="shadow-2xl">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent-hover rounded-2xl flex items-center justify-center shadow-lg shadow-accent/30">
-                <Shield className="w-10 h-10 text-white" />
+              <div className="w-16 h-16 rounded-2xl overflow-hidden border border-border shadow-lg">
+                <Image src="/peticia-logo.svg.png" alt="PETICIA logo" width={64} height={64} className="h-full w-full object-cover" />
               </div>
             </div>
             <CardTitle className="text-2xl">Welcome to PETICIA</CardTitle>

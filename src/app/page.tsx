@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Shield, Users, Target, TrendingUp } from 'lucide-react';
 import { SlideIn, StaggerContainer, StaggerItem } from '@/components/PageTransition';
@@ -33,8 +34,8 @@ export default function HomePage() {
       <nav className="border-b border-border bg-background">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <div className="w-9 h-9 bg-primary rounded-xl flex items-center justify-center">
-              <Shield className="w-5 h-5 text-white" />
+            <div className="w-9 h-9 rounded-xl overflow-hidden border border-border">
+              <Image src="/peticia-logo.svg.png" alt="PETICIA logo" width={36} height={36} className="h-full w-full object-cover" />
             </div>
             <span className="text-xl font-semibold text-foreground">PETICIA</span>
           </div>
