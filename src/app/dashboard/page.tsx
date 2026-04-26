@@ -34,11 +34,11 @@ export default function DashboardPage() {
   }, [cityPetitions, user?.id])
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Welcome Section */}
-      <div className="rounded-xl border border-border bg-gradient-to-b from-card to-card/70 p-6 shadow-sm">
-        <h1 className="text-2xl font-semibold text-foreground mb-2">Welcome back, {user?.name}</h1>
-        <p className="text-sm text-muted-foreground mb-6">
+      <div className="rounded-xl border border-border bg-gradient-to-b from-card to-card/70 p-5 shadow-sm sm:p-6">
+        <h1 className="mb-2 text-xl font-semibold text-foreground sm:text-2xl">Welcome back, {user?.name}</h1>
+        <p className="mb-5 text-sm text-muted-foreground sm:mb-6">
           Ready to create change in {user?.city}?
         </p>
         <Link href="/dashboard/create-petition">
@@ -50,7 +50,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <StatCard
             icon={<FileText className="w-5 h-5 text-muted-foreground" />}
           label="My Petitions"
@@ -79,8 +79,8 @@ export default function DashboardPage() {
 
       {/* My Petitions Section */}
       <div>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold text-foreground">My Petitions</h2>
+        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="text-lg font-semibold text-foreground sm:text-xl">My Petitions</h2>
           <Link href="/dashboard/petitions">
             <Button variant="outline" size="sm">
               View All
@@ -94,7 +94,7 @@ export default function DashboardPage() {
             <div className="animate-spin rounded-full h-8 w-8 border-2 border-border border-t-primary" />
           </div>
         ) : myPetitions.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {myPetitions.slice(0, 4).map((petition) => (
               <PetitionCard key={petition.id} petition={petition} />
             ))}
@@ -116,8 +116,8 @@ export default function DashboardPage() {
 
       {/* City Petitions Section */}
       <div>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold text-foreground">
+        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="text-lg font-semibold text-foreground sm:text-xl">
             Petitions in {user?.city || user?.state}
           </h2>
           <Link href="/dashboard/community">
@@ -133,7 +133,7 @@ export default function DashboardPage() {
             <div className="animate-spin rounded-full h-8 w-8 border-2 border-border border-t-primary" />
           </div>
         ) : filteredCityPetitions.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {filteredCityPetitions.slice(0, 4).map((petition) => (
               <PetitionCard key={petition.id} petition={petition} />
             ))}
@@ -168,7 +168,7 @@ function StatCard({
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm text-muted-foreground">{label}</p>
-            <p className="mt-2 text-4xl font-semibold tracking-tight text-foreground">
+            <p className="mt-2 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               {loading ? '...' : value}
             </p>
           </div>
@@ -184,7 +184,7 @@ const PetitionCard = memo(function PetitionCard({ petition }: { petition: any })
     <Link href={`/dashboard/petitions/${petition.id}`}>
       <Card className="h-full cursor-pointer transition-shadow hover:shadow-md">
         <CardHeader>
-          <div className="flex items-start justify-between gap-2">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div className="flex-1">
               <CardTitle className="line-clamp-2">{petition.title}</CardTitle>
               <CardDescription className="mt-1 text-sm">
@@ -206,7 +206,7 @@ const PetitionCard = memo(function PetitionCard({ petition }: { petition: any })
           </p>
         </CardContent>
         <div className="mt-auto border-t border-border/70 px-4 py-4">
-          <div className="flex items-center justify-between text-sm">
+          <div className="flex flex-col gap-3 text-sm sm:flex-row sm:items-center sm:justify-between">
             <div className="flex gap-4">
               <div>
                 <p className="text-xs text-muted-foreground">Signatures</p>

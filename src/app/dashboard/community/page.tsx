@@ -50,17 +50,17 @@ export default function CommunityPage() {
     .slice(0, 5);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 sm:space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold mb-2 text-text-primary">Community Petitions</h1>
+        <h1 className="mb-2 text-2xl font-bold text-text-primary sm:text-3xl">Community Petitions</h1>
         <p className="text-text-secondary">
           Discover and support petitions from across India
         </p>
       </div>
 
       {/* Stats */}
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
         <StatCard
           icon={<TrendingUp className="w-6 h-6 text-foreground" />}
           label="Active Petitions"
@@ -83,7 +83,7 @@ export default function CommunityPage() {
       {/* Search & Filter */}
       <Card>
         <CardContent className="pt-6">
-          <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col gap-4 md:flex-row">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" />
               <Input
@@ -97,7 +97,7 @@ export default function CommunityPage() {
               title="Filter by category"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value as any)}
-              className="h-10 rounded-md border-2 border-border-strong bg-bg-secondary px-3 text-text-primary md:w-48 focus:outline-none focus:ring-0 focus:shadow-none focus:border-border-strong"
+              className="h-10 w-full rounded-md border-2 border-border-strong bg-bg-secondary px-3 text-text-primary focus:outline-none focus:ring-0 focus:shadow-none focus:border-border-strong md:w-48"
             >
               {categories.map((cat) => (
                 <option key={cat.value} value={cat.value}>
@@ -130,7 +130,7 @@ export default function CommunityPage() {
                         <p className="text-sm text-text-secondary mb-2 line-clamp-1">
                           {petition.description}
                         </p>
-                        <div className="flex items-center gap-4 text-xs text-text-muted">
+                        <div className="flex flex-wrap items-center gap-2 text-xs text-text-muted sm:gap-4">
                           <span className="font-medium text-foreground">
                             {formatSignatureCount(petition.signatureCount)} signatures
                           </span>
@@ -191,7 +191,7 @@ export default function CommunityPage() {
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-6 text-sm text-text-muted">
+                    <div className="flex flex-wrap items-center gap-3 text-sm text-text-muted sm:gap-6">
                       <div className="flex items-center gap-1">
                         <Users className="w-4 h-4" />
                         <span className="font-semibold text-foreground">
@@ -230,7 +230,7 @@ function StatCard({ icon, label, value }: { icon: React.ReactNode; label: string
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm text-text-secondary mb-1">{label}</p>
-            <p className="text-3xl font-bold text-text-primary">{value}</p>
+            <p className="text-2xl font-bold text-text-primary sm:text-3xl">{value}</p>
           </div>
           <div className="opacity-75">{icon}</div>
         </div>

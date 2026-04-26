@@ -6,6 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { ArrowRight, Shield, Users, Target, TrendingUp } from 'lucide-react';
 import { SlideIn, StaggerContainer, StaggerItem } from '@/components/PageTransition';
 
@@ -45,16 +46,16 @@ export default function HomePage() {
         </div>
       </nav>
 
-      <div className="container mx-auto px-4 py-24">
+      <div className="container mx-auto px-4 py-16 sm:py-20 md:py-24">
         <SlideIn direction="up" className="max-w-5xl mx-auto text-center">
           {/* <span className="inline-flex items-center rounded-full border border-border-strong bg-bg-secondary/80 px-3 py-1 text-xs text-text-secondary mb-6">
             Civic action platform for India
           </span> */}
-          <h1 className="text-5xl md:text-6xl font-semibold mb-6 text-foreground leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold mb-6 text-foreground leading-tight">
             Converting Awareness into 
             <span className="text-primary"> Government Action</span>
           </h1>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
             India's own civic operating system that bridges citizens and government 
             accountability. Know your rights, raise your voice, and create real change.
           </p>
@@ -73,7 +74,7 @@ export default function HomePage() {
         </SlideIn>
 
         {/* Features Grid */}
-        <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-20">
+        <StaggerContainer className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 md:mt-20 lg:grid-cols-4">
           <StaggerItem>
             <FeatureCard
               icon={<Shield className="w-5 h-5" />}
@@ -113,9 +114,9 @@ export default function HomePage() {
         */}
 
         {/* How It Works */}
-        <div className="mt-32">
-          <h2 className="text-3xl font-semibold text-center mb-12 text-foreground">How PETICIA Works</h2>
-          <div className="grid md:grid-cols-4 gap-6">
+        <div className="mt-24 sm:mt-32">
+          <h2 className="mb-10 text-center text-2xl font-semibold text-foreground sm:mb-12 sm:text-3xl">How PETICIA Works</h2>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <StepCard number={1} title="Verify Identity" description="Sign up with your email" />
             <StepCard number={2} title="Know Rights" description="Get legal guidance from AI assistant" />
             <StepCard number={3} title="Create Petition" description="AI helps draft your petition" />
@@ -124,9 +125,9 @@ export default function HomePage() {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-32 surface-block-strong rounded-2xl p-12 text-center">
-          <h2 className="text-3xl font-semibold mb-4 text-foreground">Ready to Create Change?</h2>
-          <p className="text-lg mb-8 text-muted-foreground">
+        <div className="mt-24 rounded-2xl p-6 text-center sm:mt-32 sm:p-10 md:p-12 surface-block-strong">
+          <h2 className="mb-4 text-2xl font-semibold text-foreground sm:text-3xl">Ready to Create Change?</h2>
+          <p className="mb-8 text-base text-muted-foreground sm:text-lg">
             Join thousands of Indians taking civic action
           </p>
           <Link href="/login">
@@ -138,11 +139,13 @@ export default function HomePage() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-border-subtle mt-20 py-8">
+      <footer className="border-t border-border-subtle mt-16 py-8 sm:mt-20">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
           <p>2026 PETICIA</p>
         </div>
       </footer>
+
+      <ThemeToggle />
     </div>
   );
 }
@@ -176,4 +179,5 @@ function StepCard({ number, title, description }: { number: number; title: strin
       <h3 className="text-sm font-semibold mt-4 mb-2 text-foreground">{title}</h3>
       <p className="text-xs text-muted-foreground">{description}</p>
     </div>
-  );}
+  );
+}

@@ -290,10 +290,10 @@ export default function CreatePetitionPage() {
   ];
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="mx-auto max-w-3xl space-y-6 px-4 sm:space-y-8 sm:px-0">
       {/* Header */}
-      <div className="rounded-2xl border border-border bg-gradient-to-br from-card to-muted p-8 text-foreground">
-        <h1 className="text-3xl font-bold mb-2">Create a Petition</h1>
+      <div className="rounded-2xl border border-border bg-gradient-to-br from-card to-muted p-6 text-foreground sm:p-8">
+        <h1 className="mb-2 text-2xl font-bold sm:text-3xl">Create a Petition</h1>
         <p className="text-muted-foreground">
           {step === 'choice' && 'Choose how you want to create your petition'}
           {step === 'details' && 'Tell us about the problem'}
@@ -328,7 +328,7 @@ export default function CreatePetitionPage() {
 
       {/* Step 0: Choice */}
       {step === 'choice' && (
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* AI Generation Option */}
           <Card className="cursor-pointer hover:shadow-lg transition-shadow border-2 hover:border-border-strong" onClick={() => handleModeSelection('ai')}>
             <CardHeader>
@@ -416,9 +416,10 @@ export default function CreatePetitionPage() {
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
-              <Label htmlFor="category">Category *</Label>
+              <Label htmlFor="category-ai">Category *</Label>
               <select
-                id="category"
+                id="category-ai"
+                title="Petition category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value as PetitionCategory)}
                 className="w-full mt-2 h-10 rounded-md border border-input bg-background px-3"
@@ -467,7 +468,7 @@ export default function CreatePetitionPage() {
               />
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <Button
                 onClick={() => setStep('choice')}
                 variant="outline"
@@ -507,9 +508,10 @@ export default function CreatePetitionPage() {
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
-              <Label htmlFor="category">Category *</Label>
+              <Label htmlFor="category-manual">Category *</Label>
               <select
-                id="category"
+                id="category-manual"
+                title="Petition category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value as PetitionCategory)}
                 className="w-full mt-2 h-10 rounded-md border border-input bg-background px-3"
@@ -548,7 +550,7 @@ export default function CreatePetitionPage() {
               </p>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <Button
                 onClick={() => setStep('choice')}
                 variant="outline"
@@ -611,7 +613,7 @@ export default function CreatePetitionPage() {
               />
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <Button
                 onClick={() => setStep(mode === 'ai' ? 'details' : 'manual')}
                 variant="outline"
@@ -677,7 +679,7 @@ export default function CreatePetitionPage() {
               Use My Current Location
             </Button>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <Button
                 onClick={() => setStep(mode === 'ai' ? 'review' : 'manual')}
                 variant="outline"

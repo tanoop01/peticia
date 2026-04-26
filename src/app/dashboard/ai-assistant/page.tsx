@@ -77,22 +77,22 @@ export default function AIAssistantPage() {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="mx-auto max-w-4xl space-y-6 sm:space-y-8">
       {/* Header */}
-      <div className="rounded-2xl border border-border bg-gradient-to-br from-card to-muted p-8 text-foreground">
+      <div className="rounded-2xl border border-border bg-gradient-to-br from-card to-muted p-6 text-foreground sm:p-8">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-12 h-12 bg-background rounded-xl flex items-center justify-center border border-border">
             <Sparkles className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold">AI Rights Assistant</h1>
+            <h1 className="text-2xl font-bold sm:text-3xl">AI Rights Assistant</h1>
             <p className="text-muted-foreground">Get instant legal guidance in your language</p>
           </div>
         </div>
       </div>
 
       {/* Info Cards */}
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         <InfoCard
           icon={<Book className="w-5 h-5" />}
           title="Know Your Rights"
@@ -156,7 +156,7 @@ export default function AIAssistantPage() {
             <CardDescription>Click to use these common scenarios</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {quickQuestions.map((q, i) => (
                 <button
                   key={i}
@@ -188,7 +188,7 @@ export default function AIAssistantPage() {
             <div className="prose max-w-none">
               <ReactMarkdown>{response}</ReactMarkdown>
             </div>
-            <div className="mt-6 pt-6 border-t flex gap-4">
+            <div className="mt-6 flex flex-col gap-3 border-t pt-6 sm:flex-row">
               <Button onClick={() => setResponse(null)} variant="outline">
                 Ask Another Question
               </Button>

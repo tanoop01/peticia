@@ -7,6 +7,7 @@ import { AppSidebar } from '@/components/app-sidebar'
 import {
   SidebarProvider,
   SidebarInset,
+  SidebarTrigger,
 } from '@/components/ui/sidebar'
 
 export default function DashboardLayout({
@@ -37,9 +38,18 @@ export default function DashboardLayout({
     <SidebarProvider>
       <AppSidebar className="md:left-4" />
       <SidebarInset>
+        <div className="border-b border-border/70 bg-background/95 backdrop-blur md:hidden">
+          <div className="flex h-14 items-center gap-3 px-4">
+            <SidebarTrigger className="-ml-1" />
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-foreground">PETICIA</p>
+              <p className="truncate text-xs text-muted-foreground">Mobile navigation</p>
+            </div>
+          </div>
+        </div>
         <main className="flex-1">
-          <div className="px-6 py-8">
-            <div className="max-w-7xl mx-auto">
+          <div className="px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+            <div className="mx-auto max-w-7xl">
               {children}
             </div>
           </div>
